@@ -80,7 +80,7 @@ export default function Buildings() {
 
       {loading ? (
         <Spinner />
-      ) : buildings.length === 0 ? (
+      ) : buildings?.length === 0 ? (
         <div className="card text-center py-20">
           <p className="text-5xl mb-4">🏢</p>
           <p className="text-gray-500 font-medium">No buildings yet</p>
@@ -88,7 +88,7 @@ export default function Buildings() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {buildings.map((b) => (
+          {buildings?.map((b) => (
             <div
               key={b._id}
               className="card hover:shadow-md transition-shadow flex flex-col"

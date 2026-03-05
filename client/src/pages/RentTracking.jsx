@@ -24,7 +24,7 @@ function SummaryBox({ label, count, amount, bg, text }) {
     <div className={`${bg} rounded-xl p-4 text-center`}>
       <p className={`text-3xl font-bold ${text}`}>{count}</p>
       <p className={`text-xs font-semibold uppercase tracking-wide ${text} mt-0.5`}>{label}</p>
-      <p className={`text-xs ${text} opacity-80 mt-1`}>₹{amount.toLocaleString()}</p>
+      <p className={`text-xs ${text} opacity-80 mt-1`}>₹{(amount || 0).toLocaleString()}</p>
     </div>
   );
 }
@@ -236,7 +236,7 @@ export default function RentTracking() {
           onChange={(e) => setFilterBuilding(e.target.value)}
         >
           <option value="">All Buildings</option>
-          {buildings.map((b) => (
+          {buildings?.map((b) => (
             <option key={b._id} value={b._id}>{b.name}</option>
           ))}
         </select>
@@ -253,7 +253,7 @@ export default function RentTracking() {
       </div>
 
       {/* Summary boxes */}
-      {payments.length > 0 && (
+      {payments?.length > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-6">
           {summary.map(({ status, count, amount }) => (
             <SummaryBox
@@ -271,7 +271,7 @@ export default function RentTracking() {
       {/* Table */}
       {loading ? (
         <Spinner />
-      ) : payments.length === 0 ? (
+      ) : payments?.length === 0 ? (
         <div className="card text-center py-20">
           <p className="text-5xl mb-4">💰</p>
           <p className="text-gray-500 font-medium">No payment records found</p>
@@ -298,7 +298,7 @@ export default function RentTracking() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {payments.map((p) => (
+                {payments?.map((p) => (
                   <tr
                     key={p._id}
                     className={`hover:bg-gray-50/70 transition-colors ${
@@ -317,7 +317,7 @@ export default function RentTracking() {
                       {MONTHS[p.month - 1]} {p.year}
                     </td>
                     <td className="px-5 py-4 text-sm font-semibold text-gray-900">
-                      ₹{p.amount?.toLocaleString()}
+                      ₹{p.amount?.toLocaleString() || 0}
                     </td>
                     <td className="px-5 py-4 text-sm text-gray-600">
                       {new Date(p.dueDate).toLocaleDateString()}
@@ -410,7 +410,7 @@ export default function RentTracking() {
               required
             >
               <option value="">Select Tenant</option>
-              {tenants.map((t) => (
+              {tenants?.map((t) => (
                 <option key={t._id} value={t._id}>
                   {t.name} — {t.building?.name} Flat {t.flat?.flatNumber}
                 </option>

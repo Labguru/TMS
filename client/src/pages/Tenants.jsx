@@ -137,7 +137,7 @@ export default function Tenants() {
 
       {loading ? (
         <Spinner />
-      ) : tenants.length === 0 ? (
+      ) : tenants?.length === 0 ? (
         <div className="card text-center py-20">
           <p className="text-5xl mb-4">👥</p>
           <p className="text-gray-500 font-medium">No tenants found</p>
@@ -164,7 +164,7 @@ export default function Tenants() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-50">
-                {tenants.map((t) => (
+                {tenants?.map((t) => (
                   <tr key={t._id} className="hover:bg-gray-50/70 transition-colors">
                     <td className="px-5 py-4">
                       <p className="font-medium text-gray-900 text-sm">{t.name}</p>
@@ -320,7 +320,7 @@ export default function Tenants() {
                 required
               >
                 <option value="">Select Building</option>
-                {buildings.map((b) => (
+                {buildings?.map((b) => (
                   <option key={b._id} value={b._id}>{b.name}</option>
                 ))}
               </select>

@@ -53,7 +53,7 @@ export default function Dashboard() {
         />
         <StatCard
           title="Pending Dues"
-          value={`₹${data.pendingAmount.toLocaleString()}`}
+          value={`₹${(data.pendingAmount || 0).toLocaleString()}`}
           icon="💰"
           color="red"
           subtitle={`${data.pendingRents + data.overdueRents} payments outstanding`}
@@ -117,11 +117,11 @@ export default function Dashboard() {
         {/* Recent payments */}
         <div className="card">
           <h2 className="text-base font-semibold text-gray-900 mb-4">Recent Payments</h2>
-          {data.recentPayments.length === 0 ? (
+          {data.recentPayments?.length === 0 ? (
             <p className="text-gray-400 text-sm">No payments recorded yet.</p>
           ) : (
             <div className="divide-y divide-gray-50">
-              {data.recentPayments.map((p) => (
+              {data.recentPayments?.map((p) => (
                 <div key={p._id} className="flex items-center justify-between py-3">
                   <div>
                     <p className="text-sm font-medium text-gray-900">{p.tenant?.name}</p>
@@ -131,7 +131,7 @@ export default function Dashboard() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-semibold text-green-600">
-                      ₹{p.amount?.toLocaleString()}
+                      ₹{p.amount?.toLocaleString() || 0}
                     </p>
                     <p className="text-xs text-gray-400">
                       {new Date(p.paidDate).toLocaleDateString()}
@@ -146,11 +146,11 @@ export default function Dashboard() {
         {/* Due in 7 days */}
         <div className="card">
           <h2 className="text-base font-semibold text-gray-900 mb-4">Due in Next 7 Days</h2>
-          {data.upcomingDue.length === 0 ? (
+          {data.upcomingDue?.length === 0 ? (
             <p className="text-gray-400 text-sm">No upcoming dues this week.</p>
           ) : (
             <div className="divide-y divide-gray-50">
-              {data.upcomingDue.map((p) => (
+              {data.upcomingDue?.map((p) => (
                 <div key={p._id} className="flex items-center justify-between py-3">
                   <div>
                     <p className="text-sm font-medium text-gray-900">{p.tenant?.name}</p>
@@ -160,7 +160,7 @@ export default function Dashboard() {
                   </div>
                   <div className="text-right">
                     <p className="text-sm font-semibold text-orange-600">
-                      ₹{p.amount?.toLocaleString()}
+                      ₹{p.amount?.toLocaleString() || 0}
                     </p>
                     <p className="text-xs text-gray-400">
                       Due {new Date(p.dueDate).toLocaleDateString()}

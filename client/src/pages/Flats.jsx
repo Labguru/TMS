@@ -131,7 +131,7 @@ export default function Flats() {
           onChange={(e) => setFilterBuilding(e.target.value)}
         >
           <option value="">All Buildings</option>
-          {buildings.map((b) => (
+          {buildings?.map((b) => (
             <option key={b._id} value={b._id}>{b.name}</option>
           ))}
         </select>
@@ -145,13 +145,13 @@ export default function Flats() {
           <option value="occupied">Occupied</option>
         </select>
         <span className="text-sm text-gray-500 self-center">
-          {flats.length} flat{flats.length !== 1 ? 's' : ''}
+          {flats?.length} flat{flats?.length !== 1 ? 's' : ''}
         </span>
       </div>
 
       {loading ? (
         <Spinner />
-      ) : flats.length === 0 ? (
+      ) : flats?.length === 0 ? (
         <div className="card text-center py-20">
           <p className="text-5xl mb-4">🏠</p>
           <p className="text-gray-500 font-medium">No flats found</p>
@@ -163,7 +163,7 @@ export default function Flats() {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-          {flats.map((f) => (
+          {flats?.map((f) => (
             <div key={f._id} className="card hover:shadow-md transition-shadow flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <div>
@@ -264,7 +264,7 @@ export default function Flats() {
               required
             >
               <option value="">Select Building</option>
-              {buildings.map((b) => (
+              {buildings?.map((b) => (
                 <option key={b._id} value={b._id}>{b.name}</option>
               ))}
             </select>
